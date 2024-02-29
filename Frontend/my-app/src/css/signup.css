@@ -1,0 +1,67 @@
+/* SignUpPage.css */
+
+/* Styles for the outermost div */
+.back12 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image:
+            linear-gradient(45deg,
+                rgba(58, 58, 58, 0.75),
+                rgba(59, 59, 59, 0.75)), 
+                  url(
+'desktop-wallpaper-movie-collage-80s-movie-collage.jpg');
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: -8px;
+  }
+  
+  /* Styles for the container div */
+  .container11 {
+    width: 500px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+  }
+  
+  /* Styles for the form */
+  .signup-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Styles for form groups */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  /* Styles for labels */
+  .form-group label {
+    font-weight: bold;
+  }
+  
+  /* Styles for input fields */
+  .form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Styles for the submit button */
+  .form-group button {
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  /* Hover effect for the submit button */
+  .form-group button:hover {
+    background-color: #000000;
+    color: #fff;
+  }
+  

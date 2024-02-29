@@ -1,0 +1,104 @@
+.search-bar {
+    display: flex;
+    align-items: center;
+    width: 75%;
+    margin-top: 8%;
+    margin-bottom: 7%;
+    justify-content: center;
+    height: 50%;
+    margin-left: 13%;
+    
+  }
+  
+  .search-bar input[type="text"] {
+    padding: 7.5px;
+    
+    margin-right: 8px;
+    margin-left: 4%;
+    width: 16%;
+  }
+
+
+
+
+  .genresselect{
+    padding: 8px;
+    width: 180px;
+    margin-left: 50px;
+    margin-right: 50px
+  }
+
+
+  .genresselect:hover{
+    cursor: pointer;
+  }
+
+
+  .search-bar input[type="date"] {
+    padding: 7.5px;
+    margin-right: 8px;
+    margin-left: 1%;
+    width: 16%;
+  }
+
+  .search-bar input[type="date"]:hover{
+    cursor: pointer;
+    border: 2px #000000;
+  }
+
+  .search-bar input[type="text"]::placeholder {
+    color: #595959;
+    border: 2px #000000;
+  }
+  .search-bar input[type="text"]:hover{
+    border: 2px #000000;
+
+  }
+  .search-bar input[type="text"]:focus::placeholder {
+    color: transparent;
+  }
+  
+  
+  .search-bar .button1 {
+    padding: 10px 20px;
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+    transition: transform 0.3s ease;
+  }
+  
+  .search-bar .button1:hover {
+    background-color: #535353;
+    transform: scale(1.1);
+  }
+  
+
+  .filter-title{
+    color: #535353;
+    font-weight: bolder;
+    font-family: monospace;
+    margin-left: 280px;
+    margin-right: -100px;
+  }
+
+
+  .b{
+    margin-right: -120px; 
+    
+  }
+
+  
+
+  .d{
+    margin-left: 300px 
+   
+  }
+  
+.filtertitles{
+  display: flex;
+  margin-bottom: -100px;
+  margin-top: 60px;
+}

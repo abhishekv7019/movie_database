@@ -1,0 +1,42 @@
+.cccard {
+    width: 130px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 8px  rgba(0, 0, 0, 0.1);
+    margin-left: 20px;
+    transition: transform 0.3s ease;
+    text-align: center;
+  }
+
+  
+
+  .cccard:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+  
+  .cccard img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .cccard-body {
+    padding: 10px;
+  }
+  
+  .cccard-title {
+    font-size: 1rem;
+    margin-top: -5px;
+    margin-bottom: 10px;
+    margin-left: -8%;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .cccard-text {
+    color: #535353;
+    font-size: 1rem;
+    margin-bottom: -10px;
+  }
+  
+  

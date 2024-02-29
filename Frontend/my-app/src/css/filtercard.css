@@ -1,0 +1,42 @@
+.fcard {
+    width: 170px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 8px  rgba(0, 0, 0, 0.1);
+    margin-left: 100px;
+    transition: transform 0.3s ease;
+  }
+
+  
+
+  
+
+  .fcard:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+  
+  .fcard img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .fcard-body {
+    padding: 20px;
+  }
+  
+  .fcard-title {
+    font-size: 1rem;
+    margin-top: -5px;
+    margin-bottom: 10px;
+    margin-left: -8%;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .fcard-text {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: -10px;
+  }
+  

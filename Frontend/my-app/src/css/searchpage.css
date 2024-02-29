@@ -1,0 +1,78 @@
+.App{
+    margin-left: 0.6%;
+}
+
+.card-container{
+  display: flex;
+  margin-left: 1%;
+}
+
+
+
+
+
+
+
+
+
+
+
+.homepageposter{
+    background-image: url('https://www.wallpaperflare.com/static/735/898/350/batman-dark-knight-poster-wallpaper.jpg');
+    width: 98.9vw; 
+    margin-top: -29px;
+    height: 65vh; 
+    margin-left: -8px;
+    margin-bottom: 130px;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: 1250px auto;
+}
+
+.Top-rated{
+    margin-left: 7%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bolder;
+    color: rgb(67, 67, 67);
+}
+
+.gener-{
+    display: flex;
+}
+
+.title-{
+    margin-left: 7%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bolder;
+    color: rgb(255, 0, 0);
+}
+
+.Genres{
+    font-size: 50px;
+    text-align: center;
+    padding: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(67, 67, 67);
+    margin: 6x;
+}
+
+.filterres{
+    width: 100%;
+    display: flex;
+}
+
+.ac{
+    color: rgb(0, 117, 150);
+}
+
+.ro{
+    color: rgb(243, 31, 31);
+}
+
+.co{
+  color: rgb(167, 156, 0);
+ }
+
+.th{
+    color: black;
+ }

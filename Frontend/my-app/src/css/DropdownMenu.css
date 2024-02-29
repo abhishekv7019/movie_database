@@ -1,0 +1,44 @@
+/* DropdownMenu.css */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 14%;
+    border: 1px solid #000;
+    
+  }
+
+  .dropdown:hover{
+    transform: scale(1.01);
+  }
+  
+  .dropdown-toggle {
+    background-color: #f8f9fa;
+    color: #6a6a6a;
+    border: 1px solid #ced4da;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #ffffff;
+    border: 1px solid #ced4da;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .dropdown-menu li {
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  
+  .dropdown-menu li:hover {
+    background-color: #f8f9fa;
+  }
+  

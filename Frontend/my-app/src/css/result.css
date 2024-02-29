@@ -1,0 +1,19 @@
+.resultbox {
+    width: 80%;
+    margin-left: 15%;
+    font-size: small;
+    font-family: Arial, Helvetica, sans-serif;
+    display: grid;
+    grid-template-columns: 13% 13% 13% 13% 13%;
+    gap: 5%;
+    text-align: center;
+}
+
+.resultbox div img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.resultbox div img:hover {
+    scale: 1.1;
+}

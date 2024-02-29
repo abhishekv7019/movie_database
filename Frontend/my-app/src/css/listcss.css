@@ -1,0 +1,108 @@
+.list {
+    width: 80vw;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    display: flex;
+}
+
+.lists {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    margin: 2%;
+    margin-top: 10%;
+    justify-content: left;
+}
+
+
+
+.listcontent {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin: 5%;
+}
+
+.listname {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.posters {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2%;
+}
+
+
+
+.lists h2 {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: normal;
+    font-size: 20px;
+    margin-left: 2%;
+}
+
+.lists button {
+    height: 5vh;
+    font-size: large;
+    text-align: left;
+    margin-bottom: 2%;
+    border: none;
+    background-color: rgb(234, 234, 234);
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 24px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.lists button:hover {
+    background-color: white;
+    cursor: pointer;
+}
+
+.lists .addlist {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    margin-left: 42%;
+    margin-top: 2%;
+}
+  
+
+.posters div {
+    position: relative;
+}
+
+.posters div img {
+    width: 80%;
+    margin-bottom: -20%;
+    transition-duration: 0.3s;
+}
+
+.posters div img:hover {
+    scale: 1.1;
+    cursor: pointer;
+}
+
+.postertitle {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: left;
+    font-size: small;
+    width: 90%;
+}
+
+.watchinfo {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 80%;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    top: 1%;
+    height: 10%;
+}
+
+.watchinfo p {
+    margin: auto;
+}

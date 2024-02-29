@@ -1,0 +1,83 @@
+/* Login.css */
+
+/* Styles for the outermost div */
+.back1{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image:
+            linear-gradient(45deg,
+                rgba(58, 58, 58, 0.75),
+                rgba(59, 59, 59, 0.75)), 
+                  url(
+'desktop-wallpaper-movie-collage-80s-movie-collage.jpg');
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: -8px;
+  }
+  
+  /* Styles for the container div */
+  .container44 {
+    width: 500px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+  }
+  
+  /* Styles for the form */
+  .signup-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Styles for form groups */
+  .form-group1{
+    margin-bottom: 15px;
+  }
+  
+  /* Styles for labels */
+  .form-group1 label {
+    font-weight: bold;
+  }
+  
+  /* Styles for input fields */
+  .form-group1 input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Styles for the submit button */
+  .form-group1 button {
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 0;
+    cursor: pointer;
+  }
+  
+  /* Hover effect for the submit button */
+  .form-group1 button:hover {
+    background-color: rgb(255, 0, 0);
+  }
+  
+  /* Styles for the paragraph below the form */
+  .container44 p {
+    font-size: 14px;
+  }
+  
+  /* Styles for the link within the paragraph */
+  .container44 p a {
+    color: #ff0000;
+    text-decoration: none;
+  }
+  
+  /* Hover effect for the link */
+  .container44 p a:hover {
+    text-decoration: underline;
+    background-color: rgb(255, 255, 255);
+  }
+  

@@ -1,0 +1,159 @@
+/* App.css */
+.appp {
+  font-family: Arial, sans-serif;
+}
+
+.topcontainer {
+  width: 90%;
+  margin: 5%;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+}
+
+.profile-section {
+  width: 20%;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.sidebar {
+  padding: 20px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.sidebar .Change_pass{
+  background-color: red;
+  font: 20px;
+  border: 0px;
+  width: 150px;
+  height: 30px;
+  color: #ffffff;
+  font-family: monospace
+}
+
+.sidebar .Change_pass:hover{
+  transform: scale(1.1);
+}
+
+.sidebar .Change_pass:hover{
+  cursor: pointer;
+  background-color: rgb(54, 54, 54);
+ 
+}
+
+
+.mapandstats {
+  width: 40%;
+  margin-left: 3%;
+}
+
+.mapandstats h4, .overview h4 {
+  margin-bottom: 10px;
+  margin-top: 0;
+}
+
+.map {
+  margin-bottom: 3%;
+}
+
+.stats {
+  display: flex;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.6);
+  align-items: center;
+  justify-content: space-around;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat h2 {
+  color: #ea0909;
+  margin-bottom: 0;
+}
+
+.stat p {
+  font-size: small;
+}
+
+.overview {
+  width: 40%;
+  margin-left: 3%;
+}
+
+.overview .genres {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  grid-template-rows: auto auto auto;
+  text-align: center;
+  padding: 2px;
+  gap: 10px;
+}
+
+.overview .genres div {
+  border: 1px dotted black;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.overview .genres .empty {
+  visibility: hidden;
+}
+
+.overview .genres h3 {
+  color: #f03939;
+  font-size: small;
+  margin-top: 5px;
+}
+
+.overview .genres p {
+  font-size: smaller;
+  margin-bottom: 5px;
+}
+
+.favandfollow {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0;
+  display: flex;
+}
+
+.favandfollow .section {
+  width: 50%;
+  margin: 5%;
+  margin-bottom: 0;
+}
+
+.favandfollow .section h3 {
+  margin-left: 5%;
+}
+
+.favandfollow .section .outerbox {
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.6);
+  margin-left: 5%;
+}
+
+.favandfollow .section .outerbox .gridbox {
+  display: grid;
+  grid-template-columns: 18% 18% 18% 18% 18%;
+  column-gap: 10px;
+  border-radius: 10px;
+}
+
+
+
+
+
+.favandfollow .section .outerbox .gridbox div img {
+  width: 100%;
+  margin: 5%;
+}
+
+.favandfollow .section .outerbox .gridbox div img:hover {
+  scale: 1.1;
+}
+
