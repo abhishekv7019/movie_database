@@ -3,20 +3,23 @@ import "./css/moviepagecss.css"
 import NavbarTransparent from './defaults/navbarTransparent'
 import Footer from './defaults/footer';
 import { useParams } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 import Castcrewcard from './cast&crewframe';
 
 function MoviePage() {
 
     let { movieid } = useParams();
 
-   const [lists,setLists]=useState('hello')
+  
 
 
    useEffect(() => {
     insertArticle()
+    window.scrollTo(0, 0)
   }, []);
+   
 
-
+  
 
 
    function InsertArticle(body){
@@ -51,7 +54,7 @@ function MoviePage() {
         backdroppath:'',
         trailer:'',
         rating:'',
-        votes:'',
+        votes:'0',
         production_company:'',
         genres:[],
         cast:[],
@@ -64,6 +67,17 @@ function MoviePage() {
     const url="https://image.tmdb.org/t/p/original"
     const youtubeurl="https://www.youtube.com/embed/"
    
+
+    const [clickedDivision, setClickedDivision] = useState(null);
+
+    const navigate = useNavigate();
+
+    const handleDivisionClick = (divisionName) => {
+      setClickedDivision(divisionName);
+      navigate(`/people/${divisionName}`); 
+  
+    };
+
 
     return (
         <div className='moviepage'>
@@ -84,13 +98,13 @@ function MoviePage() {
         <div className='moviedetailedinfo'>
             <div className='moviespecifics'>
                <h3>Rating</h3>
-               <h4>{data.rating}</h4>
+               {data.rating == undefined ? <h4>Not rated</h4> :  <h4>{data.rating}</h4> }
                <h3>Votes</h3>
-               <h4>{data.votes}</h4>
+               {data.rating == undefined ? <h4>0</h4> :  <h4>{data.votes}</h4> }
                <h3>TMDB Rating</h3>
                <h4>{data.tmdb_rating}</h4>
                <h3>Release Date</h3>
-               <h4>{data.release_date}</h4>
+               <h4>{data.released_date}</h4>
                <h3>Runtime</h3>
                <h4>{data.runtime} mins</h4>
                <h3>Genres</h3>
@@ -103,7 +117,7 @@ function MoviePage() {
             <h1 className='casttitle'>Cast</h1>
             <div className='cacrframe'>
             {data.cast.map(card => (
-          <Castcrewcard image={url+card[3]} title={card[2]} description={card[0]}/>
+                 <Castcrewcard image={url+card[3]} title={card[2]}  description={card[0]} id={card[1]} handleClick={handleDivisionClick} />
         ))}
         
         </div>
@@ -112,7 +126,7 @@ function MoviePage() {
             <h1 className='casttitle'>Crew</h1>
             <div className='cacrframe'>
                 {data.crew.map(card => (
-            <Castcrewcard image={url+card[3]} title={card[2]} description={card[0]}/>
+            <Castcrewcard image={url+card[3]} title={card[2]} description={card[0]} id={card[1]}  handleClick={handleDivisionClick}/>
             ))}
             </div>
             </div>

@@ -86,6 +86,8 @@ function App() {
     <Navbar/>
     <br>
     </br>
+    <div className='homepageposter'>
+      </div>
     <SearchBar/>
     <div className="App">
     <h1 className='Top-rated'>Top Rated</h1>

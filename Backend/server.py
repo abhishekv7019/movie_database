@@ -14,7 +14,7 @@ try:
     connection = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="",
+        password="abhishek!@#$1234",
         database="movie_db_1"
     )
     
@@ -99,7 +99,7 @@ def get_movie_details():
             "id":top_movies[0][0],
             "name":top_movies[0][1],
             "language":top_movies[0][2],
-            "released_date":top_movies[0][3].strftime("%Y-%m"),
+            "released_date":top_movies[0][3].strftime("%Y-%m-%d"),
             "runtime":top_movies[0][4],
             "overview":top_movies[0][5],
             "tmdb_rating":top_movies[0][6],
@@ -113,8 +113,6 @@ def get_movie_details():
             "cast":cast,
             "crew":crew
         }
-        
-        print(movie_values)
         
         return  jsonify(movie_values)
 
@@ -222,11 +220,87 @@ def searchbar():
         return "HI"
     if request.method=='POST':
         search = request.json['query']
-        year = request.json['yeardate']
-        genres = request.json['selectedOption']
+        release_year = request.json['yeardate']
+        genre_id = request.json['selectedOption']
         language = request.json['selectedOption1']
-        print(search,year,genres,language)
-        return jsonify("succes")
+       
+        print(search,release_year,genre_id,language)
+    
+        search_term = f'%{search}%'
+    
+        
+        
+        sql_query = """
+            SELECT DISTINCT m.title, m.posterpath,m.movie_id
+            FROM movie m
+            JOIN moviegenres mg ON m.movie_id = mg.movie_id
+            WHERE
+                (m.title LIKE %s)
+                AND (%s IS NULL OR YEAR(m.release_date) = %s)
+                AND (%s IS NULL OR m.language = %s)
+                AND (%s IS NULL OR mg.genre_id = %s)
+            LIMIT 200
+        """
+
+    
+       
+        release_year_param = release_year if release_year else None
+        language_param = None if language == '' else language
+        genre_id_param = None if genre_id=="" else genre_id
+
+       
+        params = (search_term, release_year_param, release_year_param, language_param, language_param, genre_id_param, genre_id_param)
+        cursor.execute(sql_query, params)
+  
+        
+        results = cursor.fetchall()
+        return jsonify(results)
+    
+    
+@app.route('/peoplepage',methods=['GET',"POST"])
+def peoplepage():
+    if request.method=="POST":
+        
+        people_id = request.json['peopleid']
+        
+        querypepleinfo=f"""SELECT * 
+        FROM people as p
+        where p.p_id={people_id}
+        """
+        cursor.execute(querypepleinfo)
+        results1 = cursor.fetchall()
+        
+        
+        querymoviesacted = f"""
+        SELECT c.role, m.title , m.posterpath
+        FROM cast AS c, movie AS m
+        WHERE c.movie_id = m.movie_id
+        AND c.p_id = {people_id}
+        UNION
+        SELECT cr.job, m.title ,m.posterpath
+        FROM crew AS cr, movie AS m
+        WHERE cr.movie_id = m.movie_id
+        AND cr.p_id = {people_id}
+        """
+
+        
+        cursor.execute(querymoviesacted)
+        results2 = cursor.fetchall()
+        
+        
+        
+        peopledetails={
+            "id":results1[0][0],
+            "nameee":results1[0][1],
+            "dob":results1[0][2],
+            "bio":results1[0][3],
+            "posterpath":results1[0][4],
+            "moviesactedin":results2
+        }
+        
+        print(peopledetails)
+         
+        return jsonify(peopledetails)
     
     
 
@@ -237,3 +311,28 @@ if __name__ == '__main__':
 
 
    
+   
+
+
+
+
+
+"""
+        SELECT m.title,m.posterpath
+        FROM movie as m
+        WHERE
+            (CASE 
+                WHEN "THE" IS NOT NULL THEN  m.title LIKE 'THE%'
+                ELSE TRUE
+            END)
+            AND (CASE 
+                WHEN "en" IS NOT NULL THEN YEAR(m.release_date) =1994
+                ELSE TRUE
+            END)
+            AND (CASE 
+                WHEN "en" IS NOT NULL THEN m.language = "en"
+                ELSE TRUE
+            END)
+
+"""
+

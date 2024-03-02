@@ -1,38 +1,46 @@
-import React from "react";
+import React ,{useState,useEffect}from "react";
 import "./css/result.css"
 import Navbar from './defaults/navbar';
 import SearchBar from './searchbar';
+import { useLocation,useNavigate } from 'react-router-dom';
 import Footer from './defaults/footer';
 
-function Result() {
+function Result() { 
+    
 
+    const location = useLocation();
+    const { jsonData} = location.state ;
+    console.log("recived data in the result route"+jsonData)
     const url="https://image.tmdb.org/t/p/w500"
-    const completed= [
-        { img: "/qJ2tW6WMUDux911r6m7haRef0WH.jpg", title: 'The Dark Knight', score: "9", date: "2022-03-15" },
-        { img: "/rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg", title: "The Lord of the Rings:The Return of the King", score: "9", date: "2022-03-15" },
-        { img: "/8OKmBV5BUFzmozIC3pPWKHy17kx.jpg", title: "Seven Samurai", score: "9.5", date: "2022-03-15"  },
-        { img: "/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg", title: 'The Lord of the Rings: The Fellowship of the Ring', score: "9.5", date: "2022-03-15" },
-        { img: "/iiZZdoQBEYBv6id8su7ImL0oCbD.jpg", title: 'Spider-Man: Into the Spider-Verse', score: "9", date: "2022-03-15" },
-        { img: "/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg", title: 'Interstellar', score: "9.5", date: "2022-03-15" },
-        { img: "/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg", title: "The Shawshank Redemption", score: "8.5", date: "2022-03-15" },
-        { img: "/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg", title: "Forrest Gump", score: "9.5", date: "2022-03-15"  },
-        { img: "/3bhkrj58Vtu7enYsRolD1fZdja1.jpg", title: 'The Godfather', score: "9", date: "2022-03-15" },
-        { img: "/hek3koDUyRQk7FIhPXsa6mT2Zc3.jpg", title: 'The Godfather part 2', score: "9.5", date: "2022-03-15" },
-        { img: "/hek3koDUyRQk7FIhPXsa6mT2Zc3.jpg", title: 'The Godfather part 2', score: "9.5", date: "2022-03-15" }
-      ];
+    
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, []);
+
+    const [clickedDivision, setClickedDivision] = useState(null);
+
+    const navigate = useNavigate();
+
+    const handleDivisionClick = (divisionName) => {
+      setClickedDivision(divisionName);
+      navigate(`/movie/${divisionName}`); 
+  
+    };
+  
+    
     return(
         <div>
             <Navbar/>
             <SearchBar/>
-            <div className="resultbox">
-                {completed.map(card => (
-                    <div>
-                        <img src={url+card.img} />
-                        <p>{card.title}</p>
+                <div className="resultbox">
+                {   jsonData.map(card => (
+                    <div onClick={() => handleDivisionClick(card[2])}>
+                        <img src={url+card[1]} />
+                        <p>{card[0]}</p>
                     </div>
                 ))}
-            </div>
+            </div> 
             <Footer/>
         </div>
     );

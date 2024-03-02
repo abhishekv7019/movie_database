@@ -97,8 +97,7 @@ function Home() {
    
     <br>
     </br>
-    <div className='homepageposter'>
-      </div>
+    
     <div className="App">
     <h1 className='Top-rated'>Recommended</h1>
     <br>

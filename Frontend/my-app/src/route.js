@@ -10,7 +10,6 @@ import Home from './home';
 import MoviePage from './moviepage';
 import People from './peoplepage';
 import ListPage from './list';
-import Filterresult from './filterresult';
 import Result from './result';
 
 
@@ -23,7 +22,7 @@ function Routesz() {
 				<Route path='/signup' element={<SignUpPage/>} />
 				<Route path='/login' element={<LoginPage/>} />
 				<Route path='/home' element={<Home/>} />
-				<Route path='/people' element={<People/>} />
+				<Route path='/people/:peopleid' element={<People/>} />
 				<Route path='/movie/:movieid' element={<MoviePage/>} />
 				<Route path='/lists' element={<ListPage/>} />
 				<Route path='/filterresult' element={<Result/>} />
