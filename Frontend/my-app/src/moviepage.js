@@ -64,15 +64,12 @@ function MoviePage() {
 
 
 
-<<<<<<< HEAD
-=======
-    
->>>>>>> movie_database/main
+
     const url="https://image.tmdb.org/t/p/original"
     const youtubeurl="https://www.youtube.com/embed/"
    
 
-<<<<<<< HEAD
+
     const [clickedDivision, setClickedDivision] = useState(null);
 
     const navigate = useNavigate();
@@ -83,9 +80,6 @@ function MoviePage() {
   
     };
 
-=======
-  
->>>>>>> movie_database/main
 
     return (
         <div className='moviepage'>
