@@ -311,31 +311,4 @@ if __name__ == '__main__':
 
 
    
-<<<<<<< HEAD
-   
 
-
-
-
-
-"""
-        SELECT m.title,m.posterpath
-        FROM movie as m
-        WHERE
-            (CASE 
-                WHEN "THE" IS NOT NULL THEN  m.title LIKE 'THE%'
-                ELSE TRUE
-            END)
-            AND (CASE 
-                WHEN "en" IS NOT NULL THEN YEAR(m.release_date) =1994
-                ELSE TRUE
-            END)
-            AND (CASE 
-                WHEN "en" IS NOT NULL THEN m.language = "en"
-                ELSE TRUE
-            END)
-
-"""
-
-=======
->>>>>>> movie_database/main
