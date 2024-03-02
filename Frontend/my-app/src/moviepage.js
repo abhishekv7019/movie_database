@@ -61,31 +61,9 @@ function MoviePage() {
 
 
 
-    const title =  "The Godfather"
-    const release = "1972-03-14"
-    const runtime = "175"
     const url="https://image.tmdb.org/t/p/original"
-    const backdrop = "/rSPw7tgCH9c6NqICZef4kZjFOQ5.jpg"
-    const poster = "/3bhkrj58Vtu7enYsRolD1fZdja1.jpg"
-    const overview = "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers, launching a campaign of bloody revenge."
-    const tmdb = "8.7"
-    const rating = "9.2"
-    const votes = "324"
-    const trailer = "/GiZVLFvQruQ"
-    const prod =  "Paramount"
     const youtubeurl="https://www.youtube.com/embed/"
-    const genres = ["Drama", "Crime"]
-
-    const crew = [{name: "Francis Ford Coppola", img:"/3Pblihd6KjXliie9vj4iQJwbNPU.jpg", job:"Director"},
-                  {name: "Francis Ford Coppola", img:"/3Pblihd6KjXliie9vj4iQJwbNPU.jpg", job:"Producer"}]
-
-    const cast = [{name:"Marlon Brando" , img:"/fuTEPMsBtV1zE98ujPONbKiYDc2.jpg" , role:"Don Vito Corleone"},
-                  {name:"Al Pacino" , img:"/2dGBb1fOcNdZjtQToVPFxXjm4ke.jpg" , role:"Michael Corleone"},
-                  {name:"James Caan" , img:"/bGyOCCOIgcIyKjOGLoXoyp0XWHf.jpg" , role:"Sonny Corleone"},
-                  {name:"Robert Duvall" , img:"/3tcKxC5Sc3DJ6XPDKKC2EAomEWn.jpg" , role:"Tom Hagen"},
-                  {name:"Richard S. Castellano" , img:"/1vr75BdHWret81vuSJ3ugiCBkxw.jpg" , role:"Clemenza"},
-                  {name:"Diane Keaton" , img:"/siSWRRFN9uO6iCN7y9OrHU5IaJ.jpg" , role:"Kay Adams"},
-                  {name:"Talia Shire" , img:"/RkFJejmEKM80ly6fPSN7octO5c.jpg" , role:"Connie Corleone Rizzi"}]
+   
 
     return (
         <div className='moviepage'>
