@@ -14,7 +14,7 @@ try:
     connection = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="abhishek!@#$1234",
+        password="",
         database="movie_db_1"
     )
     
@@ -311,6 +311,7 @@ if __name__ == '__main__':
 
 
    
+<<<<<<< HEAD
    
 
 
@@ -336,3 +337,5 @@ if __name__ == '__main__':
 
 """
 
+=======
+>>>>>>> movie_database/main
