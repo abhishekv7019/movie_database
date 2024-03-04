@@ -4,22 +4,17 @@ import '../css/signup.css';
 
 
 function SignUpPage() {
-  
-
-
   const navigate = useNavigate();
 
-
   const [username, setusername] = useState('');
-  const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
+  const [email, setemail] = useState('');
   const [confirmpassword, setconfirmpassword] = useState('');
-  const [status,setstatus]=useState('');
 
   function handlesubmit(event){
     event.preventDefault()
     if(username.length<=4){
-      alert("username should have more than 8 characters")
+      alert("username should have 4 or more characters")
     }
     else if(password.length<8){
       alert("Password length should be more that 8")
@@ -29,11 +24,10 @@ function SignUpPage() {
     }
     else{
       setusername('')
-      setemail('')
       setpassword('')
       setconfirmpassword('')
       insertArticle()
-      navigate('/home')
+      navigate('/login')
     }
   }
 
@@ -52,34 +46,29 @@ function SignUpPage() {
   const handleChangeconfirmpassword = (event) => {
     setconfirmpassword(event.target.value);
   }
-
-  
   
      //data insertion
-     function InsertArticle(body){
-      return fetch(`http://127.0.0.1:5000/signup`,{
-            'method':'POST',
-             headers : {
-            'Content-Type':'application/json'
-        },
-        body:JSON.stringify(body)
-      })
+  function insertArticle() {
+    const body = {
+      username: username,
+      password: password,
+      email:email
+    };
+
+    fetch('http://127.0.0.1:5000/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    })
     .then(response => response.json())
-    .then(jsonData => {
-      setstatus(jsonData)
-      })
-    .catch(error => console.log(error))
-    }
-  
-    const insertArticle = () =>{
-          InsertArticle({username,email,password})
-          .then((response) => InsertArticle(response))
-          .catch(error => console.log('error',error))
-        }
-   
-
-
-
+    .then(data => {
+      console.log(data);
+    })
+    .catch(error => console.error('Error:', error));
+  }
+    
   return (
     <div className="back12">
       <div className="container11">
@@ -92,7 +81,7 @@ function SignUpPage() {
             onChange={handleChangeusername}
             required />
           </div>
-
+          
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input type="email" id="email" name="email" 

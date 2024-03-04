@@ -98,6 +98,13 @@
   background-color: rgba(255, 255, 255, 0.6);
 }
 
+
+.overview .genres div:hover{
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
 .overview .genres .empty {
   visibility: hidden;
 }
@@ -133,18 +140,26 @@
 
 .favandfollow .section .outerbox {
   border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.6);
+ 
   margin-left: 5%;
 }
 
 .favandfollow .section .outerbox .gridbox {
   display: grid;
   grid-template-columns: 18% 18% 18% 18% 18%;
+  margin-bottom: 20px;
   column-gap: 10px;
+  background-color: #ffffff;
   border-radius: 10px;
+  transition-duration: 0.3s;
 }
 
 
+.favandfollow .section .outerbox .gridbox:hover{
+  cursor: pointer;
+  background-color: #ff0000;
+  transform: scale(1.1);
+}
 
 
 
@@ -153,7 +168,22 @@
   margin: 5%;
 }
 
-.favandfollow .section .outerbox .gridbox div img:hover {
-  scale: 1.1;
+
+
+.movieactedin{
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 18px;
 }
 
+.pplbox .pplname{
+  font-size: 20px;
+  margin-top: 60px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  margin-left: 40px;
+}
+
+.pplbox {
+  display: flex;
+  
+}

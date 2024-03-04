@@ -55,6 +55,12 @@
     margin-top: -10%;
 }
 
+.header-right1{
+  margin-left: 90%;
+  margin-top: -10%;
+}
+
+
 .link{
     margin: -0.5%;
     padding: 0%;
@@ -62,6 +68,11 @@
 
 .header a:hover{
     color: red;
+}
+
+
+.loginitseems{
+  color: #333;
 }
 
 @media screen and (max-width: 500px) {

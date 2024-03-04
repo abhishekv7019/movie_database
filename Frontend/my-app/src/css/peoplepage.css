@@ -15,6 +15,18 @@
     z-index: 1;
 }
 
+.rolesandmoviename{
+    
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
+
+.rolesandmoviename .movieactedin{
+   font-weight: bold;
+   font-family: sans-serif;
+   font-size: 18px;
+}
 
 .peoplebackdrop{
     width: 100%;
@@ -90,6 +102,13 @@
     margin-bottom: 50px;
     margin-left: 510px;
     display: flex;
+    transition-duration: 0.3s;
+}
+
+.peoplepage0 .moviesacted:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+   
 }
 
 

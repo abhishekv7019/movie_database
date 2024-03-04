@@ -1,49 +1,27 @@
 import React, {  useEffect,useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom';
 import "./css/moviepagecss.css"
 import NavbarTransparent from './defaults/navbarTransparent'
 import Footer from './defaults/footer';
-import { useParams } from 'react-router-dom';
-import { useLocation,useNavigate } from 'react-router-dom';
 import Castcrewcard from './cast&crewframe';
 
 function MoviePage() {
 
     let { movieid } = useParams();
+    const username = localStorage.getItem('username')
 
-  
+    const [addbutton, setaddbutton] = useState(false)
+    const [status, setStatus] = useState('');
+    const [scoreEnabled, setScoreEnabled] = useState(false);
+    const [watchDateEnabled, setWatchDateEnabled] = useState(false);
+    const [score, setScore] = useState('');
+    const [watchDate, setWatchDate] = useState('');
+    const [isFavorite, setFavorite] = useState(false)
+    const [clickedDivision, setClickedDivision] = useState(null);
 
+    const navigate = useNavigate();
 
-   useEffect(() => {
-    insertArticle()
-    window.scrollTo(0, 0)
-  }, []);
-   
-
-  
-
-
-   function InsertArticle(body){
-    return fetch(`http://127.0.0.1:5000/get_movie_details`,{
-          'method':'POST',
-           headers : {
-          'Content-Type':'application/json'
-      },
-      body:JSON.stringify(body)
-    })
-  .then(response => response.json())
-  .then(jsonData => {
-    setData(jsonData)
-    })
-  .catch(error => console.log(error))
-  }
-
-  const insertArticle = () =>{
-        InsertArticle({movieid})
-        .then((response) => InsertArticle(response))
-        .catch(error => console.log('error',error))
-      }
-
-      const [data, setData] = useState({
+    const [data, setData] = useState({
         id:'',
         name: '',
         Language: 0,
@@ -58,24 +36,53 @@ function MoviePage() {
         production_company:'',
         genres:[],
         cast:[],
-        crew:[]
-       
+        crew:[],
+        lists:[],
+        score: 0,
+        watch: ''
     });
 
-
-
-<<<<<<< HEAD
-=======
-    
->>>>>>> movie_database/main
     const url="https://image.tmdb.org/t/p/original"
     const youtubeurl="https://www.youtube.com/embed/"
+
+   useEffect(() => {
+    InsertArticle()
+    window.scrollTo(0, 0)
+    if (data.lists.includes('Completed')) {
+        setStatus('Completed');
+        setScoreEnabled(true);
+        setWatchDateEnabled(true);
+        setScore(data.score);
+        setWatchDate(data.watch);
+    } else if (data.lists.includes('Planning')) {
+        setStatus('Planning');
+        setScoreEnabled(false);
+        setWatchDateEnabled(false);
+    } else {
+        setStatus('');
+        setScoreEnabled(false);
+        setWatchDateEnabled(false);
+    }
+    if (data.lists.includes('Favorites'))
+        setFavorite(true);
+  }, []);
    
 
-<<<<<<< HEAD
-    const [clickedDivision, setClickedDivision] = useState(null);
+   function InsertArticle(){
+    return fetch(`http://127.0.0.1:5000/get_movie_details`,{
+          'method':'POST',
+           headers : {
+          'Content-Type':'application/json'
+      },
+      body:JSON.stringify({movieid, username})
+    })
+  .then(response => response.json())
+  .then(jsonData => {
+    setData(jsonData)
+    })
+  .catch(error => console.log(error))
+  }
 
-    const navigate = useNavigate();
 
     const handleDivisionClick = (divisionName) => {
       setClickedDivision(divisionName);
@@ -83,9 +90,110 @@ function MoviePage() {
   
     };
 
-=======
-  
->>>>>>> movie_database/main
+    const handleAddClick = () => {
+        setaddbutton(true)
+        window.scrollTo(0, 0);
+        
+    };
+
+    const handleClose = () => {
+        setaddbutton(false)
+        
+    };
+
+    const handleStatusChange = (e) => {
+        const selectedStatus = e.target.value;
+        setStatus(selectedStatus);
+        if (selectedStatus === "Completed") {
+            setScoreEnabled(true);
+            setWatchDateEnabled(true);
+        } else {
+            setScoreEnabled(false);
+            setWatchDateEnabled(false);
+        }
+    };
+
+    const handleFav = () => {
+        setFavorite(!isFavorite)
+    }
+
+    const handleSave = () => {
+        if (status === 'Completed' && (!score || !watchDate)) {
+            alert('Please fill all required fields');
+            return;
+        }
+
+        if (
+            status !== initialState.status ||
+            isFavorite !== initialState.isFavorite ||
+            score !== initialState.score ||
+            watchDate !== initialState.watchDate
+        ) {
+            fetch('http://127.0.0.1:5000/update', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ movieid, username, status, isFavorite, score, watchDate })
+            })
+            .then(response => {
+                if (response.ok)
+                    return response.json();
+                else
+                    return Promise.reject('Failed to delete');
+            })
+            .then(data => {
+                if (data.success) {
+                    
+                    setStatus('');
+                    setScore('');
+                    setWatchDate('');
+                    setaddbutton(false);
+                    window.location.reload();
+                }
+                else
+                    alert('Update failed');
+            })
+            .catch(error => {
+                alert('Network error:'+ error);
+            });
+        } else {
+            console.log('No changes made');
+        }
+    };
+
+    const handleDelete = () => {
+        fetch('http://127.0.0.1:5000/delete', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ movieid, username })
+        })
+        .then(response => {
+            if (response.ok)
+                return response.json();
+            else
+                return Promise.reject('Failed to delete');
+        })
+        .then(data => {
+            if (data.success) {
+                setStatus('');
+                setFavorite(false);
+                setScore('');
+                setWatchDate('');
+                setaddbutton(false);
+                window.location.reload();
+            }
+            else
+                alert('Deletion failed');
+        })
+        .catch(error => {
+            alert('Network error:' +error);
+        });
+    };    
+    
+    const [initialState] = useState({ status, isFavorite, score, watchDate });
 
     return (
         <div className='moviepage'>
@@ -98,8 +206,33 @@ function MoviePage() {
                 </div>
                 <div className='poster'>
                     <img src={url+data.posterpath} />
-                    <button>Add to List</button>
+                    <button onClick={handleAddClick}>{data.lists.length !== 0 ? 'Edit Entry' : 'Add to List'}</button>
                 </div>
+                {addbutton && (
+                    <>
+                    <div className='popup'>
+                        <button className='close' onClick={handleClose}>X</button>
+                        <div className='options'>
+                            <div>
+                                <select value={status} onChange={handleStatusChange}>
+                                    {status ? '' : <option value='' disabled hidden>Select Status</option>}
+                                    <option value="Completed">Completed</option>
+                                    <option value="Planning">Planning</option>
+                                </select>
+                                <button className={isFavorite ? 'favorite' : 'fav'} onClick={handleFav}>Favorite</button>
+                            </div>
+                            <div>
+                                <input placeholder='Score' value={score} onChange={(e) => setScore(e.target.value)} 
+                                disabled={!scoreEnabled}></input>
+                                <input type='date' placeholder='Watch Date' value={watchDate} onChange={(e) => setWatchDate(e.target.value)} 
+                                disabled={!watchDateEnabled}></input>
+                                <button className='save' onClick={handleSave}>Save</button>
+                            </div>
+                        </div>
+                        <button className='delete' onClick={handleDelete}>Delete</button>
+                    </div>
+                    </>
+                )}
             <h1 className='movietitle'>{data.name}</h1>
             <p className='movieoverview'>{data.overview}</p>
         </div>

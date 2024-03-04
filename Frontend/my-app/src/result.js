@@ -18,12 +18,12 @@ function Result() {
         window.scrollTo(0, 0)
       }, []);
 
-    const [clickedDivision, setClickedDivision] = useState(null);
+    
 
     const navigate = useNavigate();
 
     const handleDivisionClick = (divisionName) => {
-      setClickedDivision(divisionName);
+    
       navigate(`/movie/${divisionName}`); 
   
     };
@@ -33,6 +33,7 @@ function Result() {
         <div>
             <Navbar/>
             <SearchBar/>
+            
                 <div className="resultbox">
                 {   jsonData.map(card => (
                     <div onClick={() => handleDivisionClick(card[2])}>

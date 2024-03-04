@@ -1,150 +1,126 @@
-import React, {  useEffect,useState } from 'react'
+import React, {  useEffect, useState } from 'react'
 import "./css/searchpage.css"
 import Navbar from './defaults/navbar';
 import Card from './card';
 import SearchBar from './searchbar';
 import {useNavigate} from 'react-router-dom';
 import Footer from './defaults/footer';
-
+import { getUsername } from './Auth/Login';
 
 function Home() {
-  const [username, setState] = useState('')
-  const [data, setData] = useState([]);
-	
-  const handleSubmit=(event)=>{ 
-    insertArticle()
-		setState('')
-    event.preventDefault()
-	  }
 
-    //data insertion
-    function InsertArticle(body){
-      return fetch(`http://127.0.0.1:5000/`,{
-            'method':'POST',
-             headers : {
-            'Content-Type':'application/json'
-        },
-        body:JSON.stringify(body)
-      })
-    .then(response => response.json())
-    .then(jsonData => {
-      setData(jsonData)
-      })
-    .catch(error => console.log(error))
-    }
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   
-    const insertArticle = () =>{
-          InsertArticle({username})
-          .then((response) => InsertArticle(response))
-          .catch(error => console.log('error',error))
-        }
+  const [lists, setLists] = useState({
+    recent: [],
+    upcoming: [],
+    recommend: [],
+    top_rated: []
+  });
+
+  useEffect(() => {
+    insertArticle();
+    const username = getUsername();
+    setIsLoggedIn(!!username);
+  }, []);
+  
   
 
 
-  // data fetching
-
-
-
-  const fetchData = async ()=>{
-    try{
-      const response=await fetch('http://127.0.0.1:5000/home')
-      const jsonData=await response.json();
-      setData(jsonData)
-    }catch(error){
-      console.log("Error",error)
-    }
-    
+   function InsertArticle(body){
+    return fetch(`http://127.0.0.1:5000`,{
+          'method':'POST',
+           headers : {
+          'Content-Type':'application/json'
+      },
+      body:JSON.stringify(body)
+    })
+  .then(response => response.json())
+  .then(jsonData => {
+    setLists(jsonData)
+    })
+  .catch(error => console.log(error))
   }
-  
 
-  //card
-  const cardsa= [
-    { img: "/qJ2tW6WMUDux911r6m7haRef0WH.jpg", title: 'The Dark Knight', text: "9.5" },
-    { img: "/rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg", title: "The Lord of the Rings:The Return of the King", text: "9.5" },
-    { img: "/8OKmBV5BUFzmozIC3pPWKHy17kx.jpg", title: "Seven Samurai", text: "9.5"  },
-    { img: "/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg", title: 'The Lord of the Rings: The Fellowship of the Ring', text: "9.5" },
-    { img: "/iiZZdoQBEYBv6id8su7ImL0oCbD.jpg", title: 'Spider-Man: Into the Spider-Verse', text: "9.5" },
-    
+  const insertArticle = () =>{
+        const username = getUsername();
+        InsertArticle({username})
+        .then((response) => InsertArticle(response))
+        .catch(error => console.log('error',error))
+      }
+
  
-  ];
-  
-
   const navigate = useNavigate();
 
-  const [clickedDivision, setClickedDivision] = useState(null);
-
-
   const handleDivisionClick = (divisionName) => {
-    setClickedDivision(divisionName);
     navigate(`/movie/${divisionName}`); 
-
   };
-
-  const cards= [
-    { img: "/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg", title: 'Interstellar', text: "9.5" },
-    { img: "/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg", title: "The Shawshank Redemption", text: "9.5" },
-    { img: "/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg", title: "Forrest Gump", text: "9.5" },
-    { img: "/3bhkrj58Vtu7enYsRolD1fZdja1.jpg", title: 'The Godfather', text: "9.5" },
-    { img: "/hek3koDUyRQk7FIhPXsa6mT2Zc3.jpg", title: 'The Godfather part 2', text: "9.5" }
-  ];
   
-   const consturl="https://image.tmdb.org/t/p/w500"
+  const consturl="https://image.tmdb.org/t/p/w500"
 
   return (
     <div>
-      
-    <Navbar />
-   
-    <br>
-    </br>
-    
-    <div className="App">
-    <h1 className='Top-rated'>Recommended</h1>
-    <br>
-    </br>
-    <div className='card-container'>
-    {cardsa.map(card => (
-          <Card image={consturl+card.img} title={card.title} id={card[0]} description={card.text} handleClick={handleDivisionClick}/>
-        ))}
-      </div>
-     
-    <br></br> 
-    <br></br>
-    <h1 className='title- '>Recently Watched</h1>
-    <div className='gener-'>
-        {cards.map(card => (
-          <Card image={consturl+card.img} title={card.title} id={card[0]} description={card.text} handleClick={handleDivisionClick}/>
-        ))}
-      </div>
+      <Navbar />
+      <SearchBar/>
+      <div>
+      {isLoggedIn && (
+          <>
+          {lists.recommend && lists.recommend.length > 0 && (
+              <>
+                <h1 className='listtitle'>Recommendations</h1>
+                <div className='card-container'>
+                  {lists["top_rated"].map(card => (
+                    <Card image={consturl + card[2]} title={card[1]} id={card[0]} description={card[3]} handleClick={handleDivisionClick} />
+                  ))}
+                </div>
+              </>
+            )}  
+            {lists.recent && lists.recent.length > 0 && (
+              <>
+                <h1 className='listtitle'>Recently Watched</h1>
+                <div className='card-container'>
+                  {lists["recent"].map(card => (
+                    <Card image={consturl + card[2]} title={card[1]} id={card[0]} description={card[3]} handleClick={handleDivisionClick} />
+                  ))}
+                </div>
+              </>
+            )}  
 
-      <br></br> 
-    <br></br>
-    <h1 className='title- co'>Planning</h1>
-    <div className='gener-'>
-        {cards.map(card => (
-          <Card image={consturl+card.img} title={card.title} id={card[0]} description={card.text} handleClick={handleDivisionClick}/>
-        ))}
+            {lists.upcoming && lists.upcoming.length > 0 && (
+              <>
+                <h1 className='listtitle'>Upcoming from Planning</h1>
+                <div className='card-container'>
+                  {lists["upcoming"].map(card => (
+                    <Card image={consturl + card[2]} title={card[1]} id={card[0]} description={card[3]} handleClick={handleDivisionClick} />
+                  ))}
+                </div>
+              </>
+            )}  
+
+            
+          </>
+        )}
+        
+        {!isLoggedIn && (
+          <>
+          <div className='notlogged'>
+            Login to check out all of our features.
+          </div>
+          </>
+        )}
+
+        {lists["top_rated"] && (
+          <>
+            <h1 className='listtitle'>Top Rated</h1>
+            <div className='card-container'>
+              {lists["recommend"].map(card => (
+                <Card image={consturl + card[2]} title={card[1]} id={card[0]} description={card[3]} handleClick={handleDivisionClick} />
+              ))}
+            </div>
+          </>
+        )}  
       </div>
-      <br></br> 
-    <br></br>
-    <h1 className='title- ro'>Romance</h1>
-    <div className='gener-'>
-        {cards.map(card => (
-          <Card image={consturl+card.img} title={card.title} id={card[0]} description={card.text} handleClick={handleDivisionClick}/>
-        ))}
-      </div>
-      <br></br> 
-    <br></br>
-    <h1 className='title- th'>Thriller</h1>
-    <div className='gener-'>
-        {cards.map(card => (
-          <Card image={consturl+card.img} title={card.title} id={card[0]} description={card.text} handleClick={handleDivisionClick}/>
-        ))}
-      </div>
-    <div>
-    </div>
-    </div>
-    <Footer/>
+      <Footer/>
     </div>
   );
 }

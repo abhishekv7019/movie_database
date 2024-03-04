@@ -3,6 +3,8 @@ import {useNavigate , useParams} from 'react-router-dom';
 import NavbarTransparent from "./defaults/navbarTransparent";
 import Footer from './defaults/footer';
 import "./css/peoplepage.css"
+import { getUsername } from './Auth/Login';
+
 
 
 
@@ -41,12 +43,21 @@ function People(){
   }
 
   const insertArticle = () =>{
-        InsertArticle({peopleid})
+        const username = getUsername()
+        InsertArticle({peopleid,username})
         .then((response) => InsertArticle(response))
         .catch(error => console.log('error',error))
       }
   
+      const [clickedDivision, setClickedDivision] = useState(null);
 
+      
+  
+      const handleDivisionClick = (divisionName) => {
+        setClickedDivision(divisionName);
+        navigate(`/movie/${divisionName}`); 
+    
+      };
 
 
 
@@ -56,31 +67,71 @@ function People(){
       dob:'',
       bio:'',
       posterpath:'',
-      moviesactedin:[]
+      moviesactedin:[],
+      follow:false
     });
 
 
-
+   
 
   const url="https://image.tmdb.org/t/p/original"
-  const youtubeurl="https://www.youtube.com/embed/"
+  
+  function InsertArticle1(body){
+    return fetch(`http://127.0.0.1:5000/followpeople`,{
+          'method':'POST',
+           headers : {
+          'Content-Type':'application/json'
+      },
+      body:JSON.stringify(body)
+    })
+  .then(response => response.json())
+  .then(jsonData => {
+     console.log(jsonData)
+    })
+  .catch(error => console.log(error))
+  }
+
+  const insertArticl1e = () =>{
+        const username = getUsername()
+        InsertArticle1({peopleid,username})
+        .then((response) => InsertArticle(response))
+        .catch(error => console.log('error',error))
+      }
 
 
-    const data={
-      backdroppath:"/2ZulC2Ccq1yv3pemuss6Zlfy2s.jpg",
-      posterpath:"/2ZulC2Ccq1yv3pemusks6Zlfy2s.jpg",
-      namee:"Mark Hamill",
-      overview:"Mark Richard Hamill (born September 25, 1951) is an American actor, voice artist, producer, director, and writer. Hamill is best known for his role as Luke Skywalker in the original Star Wars trilogy and also well known for voice-acting characters such as the Joker in various animated series, animated films and video games, beginning with Batman: The Animated Series, the Skeleton king in Super Robot Monkey Team Hyperforce Go!, Fire Lord Ozai in Avatar: The Last Airbender, Master Eraqus in Kingdom Hearts: Birth by Sleep, Skips in Regular Show, and Senator Stampington on Metalocalypse.",
-      dob:"1951-09-25"
-    }
+  function handleClick(){
+    insertArticl1e()
+    window.location.reload();
+  }
+  
 
+  function InsertArticle11(body){
+    return fetch(`http://127.0.0.1:5000/unfollowpeople`,{
+          'method':'POST',
+           headers : {
+          'Content-Type':'application/json'
+      },
+      body:JSON.stringify(body)
+    })
+  .then(response => response.json())
+  .then(jsonData => {
+    console.log(jsonData)
+    })
+  .catch(error => console.log(error))
+  }
 
-
-    const movies = [
-      { posterpath: "/2ZulC2Ccq1yv3pemusks6Zlfy2s.jpg", name: 'Movie 1', role: 'Role 1' },
-      { posterpath: "/2ZulC2Ccq1yv3pemusks6Zlfy2s.jpg", name: 'Movie 2', role: 'Role 2' },
-      { posterpath: "/2ZulC2Ccq1yv3pemusks6Zlfy2s.jpg", name: 'Movie 3', role: 'Role 3' }
-  ];
+  const insertArticl1e1 = () =>{
+        const username = getUsername()
+        InsertArticle11({peopleid,username})
+        .then((response) => InsertArticle(response))
+        .catch(error => console.log('error',error))
+      }
+   
+  function handleClick1(){
+    insertArticl1e1()
+    window.location.reload();
+  }
+   
   
     return (
       <div className="peoplepage0">
@@ -92,19 +143,23 @@ function People(){
                 </div>
                 <div className='peopleposter'>
                     <img src={url+peopledetails.posterpath} />
-                    <button>Add to List</button>
+                    {peopledetails.follow ?
+                    <button onClick={handleClick1}>Unfollow</button>
+                    :
+                    <button onClick={handleClick}>Follow</button>
+                    }
                 </div>
             <h1 className='peopletitle'>{peopledetails.nameee}</h1>
             <h3 className='peopledob'>{peopledetails.dob}</h3>
             <p className='peopleoverview'>{peopledetails.bio}</p>
         </div>
         <div className='moviesacteddiv'>
-    <h1 className='moviesactedtitle'>Movies acted</h1>
+    <h1 className='moviesactedtitle'>Credits</h1>
     {peopledetails.moviesactedin.map((movie, index) => (
-        <div key={index} className='moviesacted'>
+        <div key={index} className='moviesacted'  onClick={() => handleDivisionClick(movie[3])}>
             <img src={url + movie[2]} alt={`Poster ${index}`} />
-            <div>
-                <p>{movie[1]}</p>
+            <div className='rolesandmoviename'>
+                <p className='movieactedin'>{movie[1]}</p>
                 <p>{movie[0]}</p>
             </div>
         </div>

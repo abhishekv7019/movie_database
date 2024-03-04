@@ -1,77 +1,78 @@
 import React, { useState } from 'react';
 import '../css/Login.css'; 
-import {  Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function LoginPage() {
+  const navigate = useNavigate();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [status, setStatus] = useState('');
 
-  const [email, setemail] = useState('');
-  const [password, setpassword] = useState('');
-  const [status,setstatus]=useState('');
-
-
-    //data insertion
-    function InsertArticle(body){
-      return fetch(`http://127.0.0.1:5000/login`,{
-            'method':'POST',
-             headers : {
-            'Content-Type':'application/json'
-        },
-        body:JSON.stringify(body)
-      })
-    .then(response => response.json())
-    .then(jsonData => {
-      setstatus(jsonData)
-      })
-    .catch(error => console.log(error))
-    }
-  
-    const insertArticle = () =>{
-          InsertArticle({email,password})
-          .then((response) => InsertArticle(response))
-          .catch(error => console.log('error',error))
+  function loginUser() {
+    fetch(`http://127.0.0.1:5000/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username, password })
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Invalid username or password');
         }
-  
-
-
-  function handlesubmit(event){
-    event.preventDefault()
-    setemail('')
-    setpassword('')
-    insertArticle()
+      })
+      .then(data => {
+        localStorage.setItem('username', data.username);
+        const loggedinusername=localStorage.getItem('username')
+        setStatus('Logged in successfully');
+        navigate(`/home`)
+      })
+      .catch(error => {
+        setStatus(error.message);
+      });
   }
 
-  const handleChangeemail = (event) => {
-    setemail(event.target.value);
+  function handleSubmit(event) {
+    event.preventDefault();
+    loginUser();
   }
 
-  const handleChangepassword = (event) => {
-    setpassword(event.target.value);
+  function handleChangeUsername(event) {
+    setUsername(event.target.value);
+  }
+
+  function handleChangePassword(event) {
+    setPassword(event.target.value);
   }
 
   return (
     <div className="back1">
       <div className="container44">
-        <form className="signup-form" onSubmit={handlesubmit}>
+        <form className="signup-form" onSubmit={handleSubmit}>
           <h2>LOGIN</h2>
           <div className="form-group1">
-            <label htmlFor="email">Email</label>
-            <input type="email" value={email}  
-            onChange={handleChangeemail}
-             required />
+            <label htmlFor="username">Username</label>
+            <input type="text" value={username} onChange={handleChangeUsername} required />
           </div>
           <div className="form-group">
             <label htmlFor="password">Password</label>
-            <input type="password" value={password}  
-            onChange={handleChangepassword} required />
+            <input type="password" value={password} onChange={handleChangePassword} required />
           </div>
           <div className="form-group">
             <button type="submit">Login</button>
           </div>
+          {status && <p>{status}</p>}
         </form>
-        <p>Dont have an account? <a href="#"><Link to="/signup">Sign Up</Link></a></p>
+        <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
       </div>
     </div>
   );
 }
 
 export default LoginPage;
+
+export function getUsername() {
+    return localStorage.getItem('username');
+}

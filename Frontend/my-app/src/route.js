@@ -5,7 +5,6 @@ import App from './App';
 import Profile from './profile/profile';
 import SignUpPage from './Auth/sign-up';
 import LoginPage from './Auth/Login';
-import MovieDetails from './movie_details';
 import Home from './home';
 import MoviePage from './moviepage';
 import People from './peoplepage';
