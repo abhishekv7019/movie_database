@@ -42,6 +42,10 @@ function MoviePage() {
         watch: ''
     });
 
+
+
+
+
     const url="https://image.tmdb.org/t/p/original"
     const youtubeurl="https://www.youtube.com/embed/"
 
@@ -68,6 +72,7 @@ function MoviePage() {
   }, []);
    
 
+
    function InsertArticle(){
     return fetch(`http://127.0.0.1:5000/get_movie_details`,{
           'method':'POST',
@@ -84,8 +89,11 @@ function MoviePage() {
   }
 
 
+    
+
+
     const handleDivisionClick = (divisionName) => {
-      setClickedDivision(divisionName);
+      
       navigate(`/people/${divisionName}`); 
   
     };
@@ -194,6 +202,7 @@ function MoviePage() {
     };    
     
     const [initialState] = useState({ status, isFavorite, score, watchDate });
+
 
     return (
         <div className='moviepage'>
