@@ -116,7 +116,7 @@ const movie_img="https://image.tmdb.org/t/p/w500"
       </div>
       <div className='favandfollow'>
         <div className='section'>
-          <h3>Favorites</h3>
+          <h3 className='favoritesmovies'>Favorites</h3>
           <div className='outerbox'>
             <div className='gridbox'>
             { stats.favorites.map(item => (
@@ -132,7 +132,7 @@ const movie_img="https://image.tmdb.org/t/p/w500"
 
         </div>
         <div className='section'>
-          <h3>Following</h3>
+          <h3 className='followingppls'>Following</h3>
           <div className='outerbox'>
           { stats.pplfollowing.map(item => (
             <div className='gridbox' onClick={() => handleDivisionClick(item[0])}>

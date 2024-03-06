@@ -154,6 +154,19 @@
   transition-duration: 0.3s;
 }
 
+.followingppls{
+  color: #373737;
+  font-size: 30px;
+}
+
+.favoritesmovies{
+  color: #373737;
+  font-size: 30px;
+}
+
+
+
+
 
 .favandfollow .section .outerbox .gridbox:hover{
   cursor: pointer;

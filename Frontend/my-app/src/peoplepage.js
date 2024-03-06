@@ -68,6 +68,7 @@ function People(){
       bio:'',
       posterpath:'',
       moviesactedin:[],
+      countofmovies:0,
       follow:false
     });
 
@@ -87,6 +88,7 @@ function People(){
   .then(response => response.json())
   .then(jsonData => {
      console.log(jsonData)
+     
     })
   .catch(error => console.log(error))
   }
@@ -101,7 +103,12 @@ function People(){
 
   function handleClick(){
     insertArticl1e()
-    window.location.reload();
+   
+        setPeopledetails(prevState => ({
+            ...prevState,
+            follow: true
+        }));
+    
   }
   
 
@@ -116,6 +123,7 @@ function People(){
   .then(response => response.json())
   .then(jsonData => {
     console.log(jsonData)
+
     })
   .catch(error => console.log(error))
   }
@@ -129,7 +137,14 @@ function People(){
    
   function handleClick1(){
     insertArticl1e1()
-    window.location.reload();
+  
+        setPeopledetails(prevState => ({
+            ...prevState,
+            follow: false 
+        }));
+    
+    
+    
   }
    
   
@@ -154,7 +169,7 @@ function People(){
             <p className='peopleoverview'>{peopledetails.bio}</p>
         </div>
         <div className='moviesacteddiv'>
-    <h1 className='moviesactedtitle'>Credits</h1>
+    <h1 className='moviesactedtitle'>Credits:{peopledetails.countofmovies}</h1>
     {peopledetails.moviesactedin.map((movie, index) => (
         <div key={index} className='moviesacted'  onClick={() => handleDivisionClick(movie[3])}>
             <img src={url + movie[2]} alt={`Poster ${index}`} />

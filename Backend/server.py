@@ -145,7 +145,7 @@ def statics():
         query = "SELECT email FROM users WHERE username = %s"
         username = loggedinuser
         cursor.execute(query, (username,))
-        email = cursor.fetchone()[0]
+        email = cursor.fetchall()
         
         
         query = """
@@ -154,6 +154,7 @@ def statics():
         INNER JOIN people ON follow.p_id = people.p_id
         INNER JOIN users ON follow.u_id = users.u_id
         WHERE users.username = %s
+        order by people.p_id
         """
         cursor.execute(query, (loggedinuser,))
         pplfollowing = cursor.fetchall()
@@ -176,7 +177,7 @@ def statics():
             "totalmovies":totalmovies,
             "peoplefollowing":peoplefollowing,
             "average_score":round(average_score,1),
-            "email":email,
+            "email":email[0],
             "pplfollowing":pplfollowing,
             "favorites":favorites,
             "Action":'0',
@@ -444,6 +445,7 @@ def peoplepage():
             "bio":results1[0][3],
             "posterpath":results1[0][4],
             "moviesactedin":results2,
+            "countofmovies":len(results2),
             "follow":follow
         }
         
@@ -527,6 +529,7 @@ def get_movie_details():
             FROM cast as c, people as p
             WHERE c.movie_id=%s
             AND c.p_id=p.p_id
+            order by c.position
         """
         cursor.execute(query3, (movie_id,))
         cast = cursor.fetchall()

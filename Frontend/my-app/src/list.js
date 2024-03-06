@@ -83,7 +83,8 @@ function ListPage() {
                     <div className='listname'>
                     </div>
                     <div className='posters'>
-                        {selectedTab === 'completed' && data.completed.map(card => (
+                    
+                        {selectedTab === 'completed' &&  data.completed.map(card => (
                             <div key={card.id} onClick={() => handleDivisionClick(card.movie_id)}>
                                 <img src={url + card.img} className='listimg' alt='poster'/>
                                 <div className='watchinfo'>
@@ -93,11 +94,16 @@ function ListPage() {
                                 <p className='postertitle'>{card.title}</p>
                             </div>
                         ))}
+                    
+                        
                         {selectedTab === 'planning' && data.planning.map(card => (
+                            
                             <div key={card.id} onClick={() => handleDivisionClick(card.movie_id)}>
                                 <img src={url + card.img} className='listimg' alt='poster'/>
-                                <p className='postertitle'>{card.title}</p>
+                                <p className='postertitle1'>{card.title}</p>
                             </div>
+                             
+                             
                         ))}
                     </div>
                 </div>

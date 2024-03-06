@@ -33,7 +33,9 @@ function Result() {
         <div>
             <Navbar/>
             <SearchBar/>
-            
+            {jsonData.length === 0 ? (
+          <h1 className="arrayisempty">No Movies Found</h1>
+        ) : (
                 <div className="resultbox">
                 {   jsonData.map(card => (
                     <div onClick={() => handleDivisionClick(card[2])}>
@@ -42,6 +44,7 @@ function Result() {
                     </div>
                 ))}
             </div> 
+            )}
             <Footer/>
         </div>
     );
