@@ -19,9 +19,15 @@ function Home() {
   });
 
   useEffect(() => {
-    insertArticle();
     const username = getUsername();
-    setIsLoggedIn(!!username);
+    if(!!username){
+      insertArticle();
+      setIsLoggedIn(!!username);
+    }
+    else{
+      navigate(`/login`)
+    }
+    
   }, []);
   
   

@@ -1,5 +1,5 @@
 import React, { useState , useEffect } from 'react';
-import {useNavigate , useParams} from 'react-router-dom';
+import {redirect, useNavigate , useParams} from 'react-router-dom';
 import NavbarTransparent from "./defaults/navbarTransparent";
 import Footer from './defaults/footer';
 import "./css/peoplepage.css"
@@ -102,12 +102,19 @@ function People(){
 
 
   function handleClick(){
-    insertArticl1e()
+    const username = getUsername()
+    if(!!username){
+      insertArticl1e()
    
         setPeopledetails(prevState => ({
             ...prevState,
             follow: true
         }));
+    }
+    else{
+      navigate(`/login`)
+    }
+    
     
   }
   

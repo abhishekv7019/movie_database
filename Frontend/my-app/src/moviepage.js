@@ -99,6 +99,12 @@ function MoviePage() {
     };
 
     const handleAddClick = () => {
+        if(!!username){
+            console.log("passed")
+          }
+          else{
+            navigate('/login');
+          }
         setaddbutton(true)
         window.scrollTo(0, 0);
         
