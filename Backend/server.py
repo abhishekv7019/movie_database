@@ -16,8 +16,8 @@ try:
     connection = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="abhishek!@#$1234",
-        database="movie"
+        password="",
+        database=""
     )
     
     cursor = connection.cursor()
