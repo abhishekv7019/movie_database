@@ -30,7 +30,7 @@ function Navbar() {
 	return (
 		<div>
          <div class="header">
-  <h1><a href="#default" class="logo">Movie <span style={divStyle}>Tracker</span></a></h1>
+  <h1><a href="#default" class="logo">The<span style={divStyle}>Spian</span></a></h1>
   <div className="header-center">
     <Link className='link' to="/home">
     <a  href="#">Home</a>
