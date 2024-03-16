@@ -62,6 +62,12 @@ function Home() {
     navigate(`/movie/${divisionName}`); 
   };
   
+
+  const styles = {
+      color:"red",
+      fontSize: '34px'
+    }
+
   const consturl="https://image.tmdb.org/t/p/w500"
 
   return (
@@ -76,10 +82,11 @@ function Home() {
           {lists.recommend && lists.recommend.length > 0 && (
               <>
                 <h1 className='listtitle'>Recommendations</h1>
+                <h2 className='recommendtitle'>Because You have watched <span style={styles}>{lists["recent"][0][1]}</span></h2>
                 <div className='card-container'>
-                  {lists["top_rated"].map(card => (
-                    <Card image={consturl + card[2]} title={card[1]} id={card[0]} description={card[3]} handleClick={handleDivisionClick} />
-                  ))}
+                {lists["recommend"].map(card => (
+                <Card image={consturl + card[2]} title={card[1]} id={card[0]} description={card[3]} handleClick={handleDivisionClick} />
+              ))}
                 </div>
               </>
             )}  
@@ -117,13 +124,16 @@ function Home() {
           </>
         )}
 
+
+
+
         {lists["top_rated"] && (
           <>
             <h1 className='listtitle'>Top Rated</h1>
             <div className='card-container'>
-              {lists["recommend"].map(card => (
-                <Card image={consturl + card[2]} title={card[1]} id={card[0]} description={card[3]} handleClick={handleDivisionClick} />
-              ))}
+            {lists["top_rated"].map(card => (
+                    <Card image={consturl + card[2]} title={card[1]} id={card[0]} description={card[3]} handleClick={handleDivisionClick} />
+                  ))}
             </div>
           </>
         )}  

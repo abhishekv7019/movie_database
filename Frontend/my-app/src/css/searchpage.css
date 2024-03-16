@@ -7,6 +7,11 @@
   margin-left: 1%;
 }
 
+.recommendtitle{
+    font-family: sans-serif;
+    margin-left: 110px;
+    margin-bottom: 40px;
+}
 
 .listtitle{
     margin-left: 7%;
@@ -14,6 +19,7 @@
     margin-top: 50px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: bolder;
+    font-size: 35px;
     color: rgb(67, 67, 67);
 }
 

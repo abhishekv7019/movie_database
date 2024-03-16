@@ -5,8 +5,9 @@ from flask_mysqldb import MySQL
 from datetime import timedelta
 import mysql.connector
 from Auth import login_bp, signup_bp
-
-
+from recommendation import *
+import numpy as np
+import pandas as pd
 
 
 app = Flask(__name__)
@@ -16,8 +17,8 @@ try:
     connection = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="",
-        database=""
+        password="abhishek!@#$1234",
+        database="movie"
     )
     
     cursor = connection.cursor()
@@ -61,10 +62,13 @@ def searchtop1():
             JOIN users u ON lc.u_id = u.u_id
             JOIN list l ON lc.u_id = l.u_id AND lc.list_no = l.list_no
             WHERE u.username = '{username}' AND l.list_no = 1
+            ORDER BY lc.watch DESC
             LIMIT 5;
         """
         cursor.execute(query2)
         recent = cursor.fetchall()
+        
+        print(recent[0][0])
         
         query3 = f"""
             SELECT m.movie_id,m.title,m.posterpath,m.tmdb_rating
@@ -73,15 +77,23 @@ def searchtop1():
             INNER JOIN list l ON lc.u_id = l.u_id AND lc.list_no = l.list_no
             INNER JOIN users u ON lc.u_id = u.u_id
             WHERE u.username = '{username}' AND l.list_no = 2
-            ORDER BY m.tmdb_rating DESC
             LIMIT 5;
         """
         cursor.execute(query3)
         upcoming = cursor.fetchall()
         
-        query4 = "SELECT movie_id,title,posterpath,tmdb_rating FROM movie ORDER BY tmdb_rating DESC LIMIT 5"
-        cursor.execute(query4)
-        recommend = cursor.fetchall()
+        
+        if ((ratings['movieId'] == recent[0][0]).sum()>0):
+            movie_ids11 = find_similar_movies(recent[0][0],  metric='cosine', k=10)
+            print(movie_ids11)
+            query4 = "SELECT movie_id,title,posterpath,tmdb_rating FROM movie WHERE movie_id IN ({}) order by movie_id LIMIT 5".format(','.join(map(str, movie_ids11)))
+            cursor.execute(query4)
+            recommend = cursor.fetchall()
+        
+        else:
+            
+            recommend = top_movies
+            
     
         return jsonify({
             "recent":recent,
