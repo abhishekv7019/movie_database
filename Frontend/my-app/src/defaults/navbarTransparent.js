@@ -28,7 +28,7 @@ function NavbarTransparent() {
 	return (
 		<div>
          <div className="header2">
-  <h1><a href="#default" className="logo">Movie <span style={divStyle}>Tracker</span></a></h1>
+  <h1><a href="#default" className="logo">The<span style={divStyle}>spian</span></a></h1>
   <div className="header-center">
     <Link className='link' to="/home">
     <a  href="#">Home</a>
