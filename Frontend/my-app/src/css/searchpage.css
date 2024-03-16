@@ -13,6 +13,7 @@
     margin-bottom: 40px;
 }
 
+
 .listtitle{
     margin-left: 7%;
     margin-bottom: 50px;
@@ -33,14 +34,28 @@
 
 
 .welcomemessage{
-    text-align: center;
-    margin: 130px;
+    position: absolute;
+    top:250px;
+    left: 620px;
     font-family: monospace;
-    color: rgb(93, 93, 93);
+    font-size: 30px;
+    color: rgb(255, 255, 255);
 }
 
 
 
+.homepageposter1{
+    background-image: url('https://www.creativefabrica.com/wp-content/uploads/2022/05/17/Futuristic-Red-Blue-Background-Design-Graphics-30683310-1.jpg');
+    width: 98.9vw; 
+    margin-top: -29px;
+    height: 65vh; 
+    margin-left: -8px;
+    margin-bottom: -50px;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: 1250px auto;
+    margin-bottom: 130px;
+}
 
 
 

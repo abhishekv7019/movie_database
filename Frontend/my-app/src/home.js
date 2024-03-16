@@ -73,10 +73,11 @@ function Home() {
   return (
     <div>
       <Navbar />
-      <div className='homepageposter'>
+      <div className='homepageposter1'>
+      <h1 className='welcomemessage'>Welcome {getUsername()}</h1>
       </div>
       <div>
-        <h1 className='welcomemessage'>Welcome {getUsername()}</h1>
+       
       {isLoggedIn && (
           <>
           {lists.recommend && lists.recommend.length > 0 && (
