@@ -17,7 +17,6 @@ function MoviePage() {
     const [score, setScore] = useState('');
     const [watchDate, setWatchDate] = useState('');
     const [isFavorite, setFavorite] = useState(false)
-    const [clickedDivision, setClickedDivision] = useState(null);
 
     const navigate = useNavigate();
 
@@ -39,12 +38,9 @@ function MoviePage() {
         crew:[],
         lists:[],
         score: 0,
-        watch: ''
+        watch: '',
+        similar: []
     });
-
-
-
-
 
     const url="https://image.tmdb.org/t/p/original"
     const youtubeurl="https://www.youtube.com/embed/"
@@ -69,6 +65,9 @@ function MoviePage() {
     }
     if (data.lists.includes('Favorites'))
         setFavorite(true);
+        const url="https://image.tmdb.org/t/p/w500"
+        const youtubeurl="https://www.youtube.com/embed/"
+    
   }, []);
    
 
@@ -88,15 +87,16 @@ function MoviePage() {
   .catch(error => console.log(error))
   }
 
-
-    
-
-
     const handleDivisionClick = (divisionName) => {
-      
       navigate(`/people/${divisionName}`); 
-  
     };
+
+    const handlePosterClick = (divisionN1ame) => {
+        navigate(`/movie/${divisionN1ame}`); 
+        window.location.reload();
+        window.scrollTo(0, 0);
+    };
+  
 
     const handleAddClick = () => {
         if(!!username){
@@ -294,6 +294,19 @@ function MoviePage() {
         </div>
             </div>
         </div>
+        {data.similar && data.similar.length > 0 && (
+              <>
+                <h1 className='similartitle'>Similar Movies</h1>
+                <div className='similarlist'>
+                {data["similar"].map(card => (
+                    <div onClick={() => handlePosterClick(card[0])}>
+                        <img src={url + card[2]} />
+                        <p>{card[1]}</p>
+                    </div>
+                ))}
+                </div>
+              </>
+            )} 
         <Footer/>
     </div>
     );

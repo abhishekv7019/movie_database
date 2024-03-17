@@ -534,8 +534,7 @@ def get_movie_details():
         """
         cursor.execute(query2, (movie_id,))
         genres = [item[0] for item in cursor.fetchall()]
-
-    
+        
         query3 = """
             SELECT c.role, c.p_id, p.name, p.imgpath
             FROM cast as c, people as p
@@ -585,6 +584,16 @@ def get_movie_details():
                     result = cursor.fetchone()
                     score = result[0]
                     watch = result[1].strftime("%Y-%m-%d")
+
+        movieid = int(movie_id)
+        if (ratings['movieId'] == movieid).any():
+            movie_ids = find_similar_movies(movieid,  metric='cosine', k=10)
+            print(movie_ids)
+            query4 = "SELECT movie_id,title,posterpath FROM movie WHERE movie_id IN ({}) order by movie_id LIMIT 5".format(','.join(map(str, movie_ids)))
+            cursor.execute(query4)
+            similar = cursor.fetchall()
+        else:
+            similar = []
     
         movie_values={
             "id":movie[0][0],
@@ -605,7 +614,8 @@ def get_movie_details():
             "crew":crew,
             "lists": lists,
             "score": score,
-            "watch": watch
+            "watch": watch,
+            "similar": similar
         }
         return  jsonify(movie_values)
     

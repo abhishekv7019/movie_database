@@ -1,5 +1,6 @@
 
 
+
 .moviepage {
     width: 100vw;
 }
@@ -235,4 +236,35 @@
     color: black;
     background-color: red;
     cursor: pointer;
+}
+
+.similartitle {
+    margin-left: 10.5%;
+    margin-top: 5%;
+    font-size: 40px;
+    color: rgb(58, 58, 58);
+}
+
+.similarlist {
+    display: grid;
+    grid-template-columns: 15% 15% 15% 15% 15%;
+    margin-left: 10.3%;
+    column-gap: 5%;
+}
+
+.similarlist div img {
+    width: 90%;
+    transition-duration: 0.3s;
+    border-radius: 10px;
+}
+
+.similarlist div img:hover {
+    cursor: pointer;
+    scale: 1.1;
+}
+
+.similarlist div p {
+    text-align: center;
+    font-size: large;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
